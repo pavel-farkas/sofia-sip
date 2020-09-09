@@ -1912,6 +1912,20 @@ int nta_agent_get_stats(nta_agent_t *agent,
 	       NTATAG_S_RECV_RETRY(agent->sa_stats->as_recv_retry),
 	       NTATAG_S_TOUT_REQUEST(agent->sa_stats->as_tout_request),
 	       NTATAG_S_TOUT_RESPONSE(agent->sa_stats->as_tout_response),
+	       NTATAG_Q_IN_COMPLETED(agent->sa_in.completed->q_length),
+	       NTATAG_Q_IN_FINAL_FAILED(agent->sa_in.final_failed->q_length),
+	       NTATAG_Q_IN_INV_COMPLETED(agent->sa_in.inv_completed->q_length),
+	       NTATAG_Q_IN_INV_CONFIRMED(agent->sa_in.inv_confirmed->q_length),
+	       NTATAG_Q_IN_PRELIMINARY(agent->sa_in.preliminary->q_length),
+	       NTATAG_Q_IN_PROCEEDING(agent->sa_in.proceeding->q_length),
+	       NTATAG_Q_IN_TERMINATED(agent->sa_in.terminated->q_length),
+	       NTATAG_Q_OUT_COMPLETED(agent->sa_out.completed->q_length),
+	       NTATAG_Q_OUT_DELAYED(agent->sa_out.delayed->q_length),
+	       NTATAG_Q_OUT_INV_CALLING(agent->sa_out.inv_calling->q_length),
+	       NTATAG_Q_OUT_INV_COMPLETED(agent->sa_out.inv_completed->q_length),
+	       NTATAG_Q_OUT_INV_PROCEEDING(agent->sa_out.inv_proceeding->q_length),
+	       NTATAG_Q_OUT_RESOLVING(agent->sa_out.resolving->q_length),
+	       NTATAG_Q_OUT_TERMINATED(agent->sa_out.terminated->q_length),
 	       TAG_END());
 
   ta_end(ta);
@@ -6466,14 +6480,8 @@ static int nta_incoming_response_headers(nta_incoming_t *irq,
     clone = 1, sip->sip_call_id = sip_call_id_copy(home, irq->irq_call_id);
   if (!sip->sip_cseq)
     clone = 1, sip->sip_cseq = sip_cseq_copy(home, irq->irq_cseq);
-  if (!sip->sip_via) {
-    clone = 1;
-    /* 100 responses are not forwarded by proxies, so only include the topmost Via header */
-    if (sip->sip_status && sip->sip_status->st_status == 100)
-      sip->sip_via = (sip_via_t *)msg_header_copy_one(home, (msg_header_t const *)irq->irq_via);
-    else
-      sip->sip_via = sip_via_copy(home, irq->irq_via);
-  }
+  if (!sip->sip_via)
+    clone = 1, sip->sip_via = sip_via_copy(home, irq->irq_via);
 
   if (clone)
     msg_set_parent(msg, (msg_t *)irq->irq_home);
