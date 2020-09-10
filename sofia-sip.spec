@@ -1,5 +1,5 @@
 Name:           sofia-sip
-Version:        1.13.0
+Version:        1.14.0
 Release:        1%{?dist}
 Summary:        Sofia SIP User-Agent library
 
@@ -80,11 +80,11 @@ find . -name installdox -delete
 
 %files devel
 #%doc libsofia-sip-ua/docs/html
-%dir %{_includedir}/sofia-sip-1.13
-%dir %{_includedir}/sofia-sip-1.13/sofia-sip
-%{_includedir}/sofia-sip-1.13/sofia-sip/*.h
-%dir %{_includedir}/sofia-sip-1.13/sofia-resolv
-%{_includedir}/sofia-sip-1.13/sofia-resolv/*.h
+%dir %{_includedir}/sofia-sip-1.14
+%dir %{_includedir}/sofia-sip-1.14/sofia-sip
+%{_includedir}/sofia-sip-1.14/sofia-sip/*.h
+%dir %{_includedir}/sofia-sip-1.14/sofia-resolv
+%{_includedir}/sofia-sip-1.14/sofia-resolv/*.h
 %{_libdir}/libsofia-sip-ua.so
 %{_libdir}/pkgconfig/sofia-sip-ua.pc
 %{_datadir}/sofia-sip
@@ -94,7 +94,7 @@ find . -name installdox -delete
 
 %files glib-devel
 #%doc libsofia-sip-ua-glib/docs/html
-%{_includedir}/sofia-sip-1.13/sofia-sip/su_source.h
+%{_includedir}/sofia-sip-1.14/sofia-sip/su_source.h
 %{_libdir}/libsofia-sip-ua-glib.so
 %{_libdir}/pkgconfig/sofia-sip-ua-glib.pc
 
@@ -103,6 +103,8 @@ find . -name installdox -delete
 #%{_mandir}/man1/*.1*
 
 %changelog
+* Wed Sep 9 2020 2600Hz <engineering@2600hz.com> - 1.14.0-1
+- add queue monitoring
 * Wed Aug 12 2020 FreeSWITCH Project <andrey@freeswitch.com> - 1.13.0-2
 - Fix packaging with glib
 * Tue Jul 28 2020 FreeSWITCH Project <andrey@freeswitch.com> - 1.13.0-1
