@@ -1,8 +1,14 @@
-sofia-sip (1.13.16-1) unstable; urgency=medium
+sofia-sip (1.14.2-1) unstable; urgency=medium
 
-  * New Release.
+  * Add X-FS-Core-UUID
 
- -- FreeSWITCH Solutions <packages@freeswitch.com>  Thu, 13 May 2023 08:30:20 +0200
+ -- 2600Hz <engineering@2600hz.com>  Wed, 9 Sep 2020 23:58:37 +0200
+
+sofia-sip (1.14.1-1) unstable; urgency=medium
+
+  * Add queue monitoring.
+
+ -- 2600Hz <engineering@2600hz.com>  Wed, 9 Sep 2020 23:58:37 +0200
 
 sofia-sip (1.13.15-1) unstable; urgency=medium
 
