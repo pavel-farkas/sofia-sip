@@ -632,6 +632,11 @@ msg_t *nua_client_request_template(nua_client_request_t *cr)
     sip_add_tagis(msg, sip, &t);
   }
 
+  if (!sip->sip_x_fs_core_uuid && NH_PGET(nh, x_fs_core_uuid)) {
+    SU_DEBUG_1(("ADD SIP TAG HEADER (%s): \n", (char const *)NH_PGET(nh, x_fs_core_uuid)));
+    sip_add_make(msg, sip, sip_x_fs_core_uuid_class, NH_PGET(nh, x_fs_core_uuid));
+  }
+
   return msg;
 }
 
@@ -792,6 +797,10 @@ int nua_client_request_sendmsg(nua_client_request_t *cr)
     }
   }
 
+  if (!sip->sip_x_fs_core_uuid && NH_PGET(nh, x_fs_core_uuid)) {
+    SU_DEBUG_1(("ADD SIP TAG HEADER (%s): \n", (char const *)NH_PGET(nh, x_fs_core_uuid)));
+    sip_add_make(msg, sip, sip_x_fs_core_uuid_class, NH_PGET(nh, x_fs_core_uuid));
+  }
 
   /**
    * For in-dialog requests, the request URI is taken from the @Contact
@@ -822,6 +831,11 @@ int nua_client_request_sendmsg(nua_client_request_t *cr)
    * @AllowEvents headers are added to the request if they are not already
    * set.
    */
+  if (!sip->sip_x_fs_core_uuid && NH_PGET(nh, x_fs_core_uuid)) {
+    SU_DEBUG_1(("CLIENT ADD SIP TAG HEADER (%s): \n", (char const *)NH_PGET(nh, x_fs_core_uuid)));
+    sip_add_make(msg, sip, sip_x_fs_core_uuid_class, NH_PGET(nh, x_fs_core_uuid));
+  }
+
   if (!sip->sip_allow)
     sip_add_dup(msg, sip, (sip_header_t*)NH_PGET(nh, allow));
 
