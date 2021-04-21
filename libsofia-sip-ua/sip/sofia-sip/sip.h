@@ -229,6 +229,7 @@ typedef struct sip_security_agree_s sip_security_verify_t;
 /* RFC 3608 - Service Route */
 typedef struct sip_route_s     	    sip_service_route_t;
 
+typedef struct msg_generic_s        sip_x_fs_core_uuid_t;
 
 /**SIP message object.
  *
@@ -351,6 +352,8 @@ struct sip_s {
   sip_content_disposition_t *sip_content_disposition;
 				/**< Content-Disposition */
   sip_content_length_t      *sip_content_length;/**< Content-Length (l) */
+
+  sip_x_fs_core_uuid_t      *sip_x_fs_core_uuid;	/**< Server UUID */
 
   /* === Headers end here */
 
