@@ -976,6 +976,16 @@ static int nhp_set_tags(su_home_t *home,
 	value = 0;
       NHP_SET_STR(nhp, organization, value);
     }
+    /* SIPTAG_X_FS_CORE_UUID(uuid) */
+    else if (tag == siptag_x_fs_core_uuid) {
+      NHP_SET_STR_BY_HEADER(nhp, x_fs_core_uuid, value);
+    }
+    /* SIPTAG_X_FS_CORE_UUID_STR(uuid) */
+    else if (tag == siptag_x_fs_core_uuid_str) {
+      if (value == -1)
+	value = 0;
+      NHP_SET_STR(nhp, x_fs_core_uuid, value);
+    }
     /* SIPTAG_VIA(via) */
     else if (tag == siptag_via) {
       NHP_SET_STR_BY_HEADER(nhp, via, value);

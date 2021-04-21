@@ -9769,6 +9769,7 @@ msg_t *outgoing_ackmsg(nta_outgoing_t *orq, sip_method_t m, char const *mname,
   sip_add_dup(msg, sip, (sip_header_t *)old->sip_reject_contact);
   sip_add_dup(msg, sip, (sip_header_t *)old->sip_request_disposition);
   sip_add_dup(msg, sip, (sip_header_t *)old->sip_max_forwards);
+  sip_add_dup(msg, sip, (sip_header_t *)old->sip_x_fs_core_uuid);
 
   if (old->sip_via) {
     /* Add only the topmost Via header */

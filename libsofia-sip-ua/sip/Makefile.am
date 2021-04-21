@@ -48,6 +48,7 @@ libsip_la_SOURCES = 	$(INTERNAL_H) \
 			sip_caller_prefs.c sip_reason.c \
 			sip_status.c sip_time.c \
 			sip_tag_class.c sip_inlined.c \
+			sip_x_fs_core_uuid.c \
 			$(BUILT_SOURCES)
 
 COVERAGE_INPUT = 	$(libsip_la_SOURCES) $(include_sofia_HEADERS)
