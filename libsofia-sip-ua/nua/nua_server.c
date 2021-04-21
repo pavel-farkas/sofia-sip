@@ -538,6 +538,7 @@ int nua_server_respond(nua_server_request_t *sr, tagi_t const *tags)
   if (sr->sr_status == 100) {
     return nta_incoming_treply(sr->sr_irq, SIP_100_TRYING,
                                SIPTAG_USER_AGENT_STR(NH_PGET(nh, user_agent)),
+                               TAG_IF(NH_PGET(nh, x_fs_core_uuid), SIPTAG_X_FS_CORE_UUID_STR(NH_PGET(nh, x_fs_core_uuid))),
                                TAG_END());
     return 0;
   }
@@ -553,6 +554,10 @@ int nua_server_respond(nua_server_request_t *sr, tagi_t const *tags)
 				     sr->sr_status,
 				     sr->sr_phrase,
 				     TAG_NEXT(tags)) < 0)
+    ;
+  else if (!sip->sip_x_fs_core_uuid && NH_PGET(nh, x_fs_core_uuid) &&
+	   sip_add_make(msg, sip, sip_x_fs_core_uuid_class,
+			NH_PGET(nh, x_fs_core_uuid)) < 0)
     ;
   else if (!sip->sip_supported && NH_PGET(nh, supported) &&
 	   sip_add_dup(msg, sip, (sip_header_t *)NH_PGET(nh, supported)) < 0)
