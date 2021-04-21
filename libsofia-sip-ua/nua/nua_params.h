@@ -132,6 +132,8 @@ struct nua_handle_preferences
   unsigned         nhp_keepalive, nhp_keepalive_stream;
   char const      *nhp_registrar;
 
+  char const         *nhp_x_fs_core_uuid;
+
   sip_allow_t        *nhp_allow;
   sip_supported_t    *nhp_supported;
   sip_allow_events_t *nhp_allow_events;
@@ -221,6 +223,7 @@ struct nua_handle_preferences
     unsigned nhb_retry_after_enable:1;
     unsigned nhb_auto_invite_100:1;
     unsigned nhb_call_tls_orq_connect_timeout:1;
+    unsigned nhb_x_fs_core_uuid:1;
     unsigned :0;
   } set_bits;
     unsigned set_unsigned[2];
