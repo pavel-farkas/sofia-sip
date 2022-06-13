@@ -1,3 +1,9 @@
+sofia-sip (1.14.3-1) unstable; urgency=medium
+
+  * New Release from upstream
+
+ -- 2600Hz <engineering@2600hz.com>  Mon, 13 Jun 2022 23:58:37 +0200
+
 sofia-sip (1.14.2-1) unstable; urgency=medium
 
   * Add X-FS-Core-UUID

@@ -1,5 +1,5 @@
 Name:           sofia-sip
-Version:        1.14.2
+Version:        1.14.3
 Release:        1%{?dist}
 Summary:        Sofia SIP User-Agent library
 
@@ -107,6 +107,8 @@ find . -name installdox -delete
 #%{_mandir}/man1/*.1*
 
 %changelog
+* Mon Jun 13 2022 2600Hz <engineering@2600hz.com> - 1.14.3-1
+- New Release from upstream
 * Wed Mar 23 2022 2600Hz <engineering@2600hz.com> - 1.14.2-1
 - add X-FS-Core-UUID
 * Wed Sep 9 2020 2600Hz <engineering@2600hz.com> - 1.14.1-1
