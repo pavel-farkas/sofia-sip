@@ -44,6 +44,8 @@
 #include <assert.h>
 #include <errno.h>
 #include <limits.h>
+#include <sofia-sip/sip_protos.h>
+#include <sofia-sip/sip.h>
 
 #define TPORT_STAMP_SIZE 144
 
@@ -118,6 +120,7 @@ int tport_open_log(tport_master_t *mr, tagi_t *tags)
 {
   int n;
   int log_msg = mr->mr_log != 0;
+  int log_filter_options = mr->mr_log_filter_options != 0;
   char const *dump = NULL;
   char const *capt = NULL;;
   
@@ -125,6 +128,7 @@ int tport_open_log(tport_master_t *mr, tagi_t *tags)
   
   n = tl_gets(tags,
 	      TPTAG_LOG_REF(log_msg),
+	      TPTAG_LOG_FILTER_OPTIONS_REF(log_filter_options),
 	      TPTAG_DUMP_REF(dump),
 	      TPTAG_CAPT_REF(capt),
 	      TAG_END());
@@ -132,6 +136,7 @@ int tport_open_log(tport_master_t *mr, tagi_t *tags)
   if (getenv("MSG_STREAM_LOG") != NULL || getenv("TPORT_LOG") != NULL)
     log_msg = 1;
   mr->mr_log = log_msg ? MSG_DO_EXTRACT_COPY : 0;
+  mr->mr_log_filter_options = log_filter_options;
 
   if (getenv("TPORT_CAPT"))
     capt = getenv("TPORT_CAPT");
@@ -831,6 +836,15 @@ void tport_log_msg(tport_t *self, msg_t *msg,
   size_t buffer_size = 0;
   size_t buffer_pos = 0;
   size_t bytes_written = 0;
+  sip_t *sip = sip_object(msg);
+  tport_master_t *mr = self->tp_master;
+
+  if (mr && mr->mr_log_filter_options && sip) {
+    sip_cseq_t *seq = sip_cseq(sip);
+    if (seq->cs_method == sip_method_options) {
+      return;
+    }
+  }
 
 #define MSG_SEPARATOR \
   "------------------------------------------------------------------------\n"

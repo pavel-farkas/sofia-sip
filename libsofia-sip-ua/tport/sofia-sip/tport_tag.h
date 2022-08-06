@@ -327,6 +327,12 @@ TPORT_DLL extern tag_typedef_t tptag_log;
 TPORT_DLL extern tag_typedef_t tptag_log_ref;
 #define TPTAG_LOG_REF(x) tptag_log_ref, tag_bool_vr(&(x))
 
+TPORT_DLL extern tag_typedef_t tptag_log_filter_options;
+#define TPTAG_LOG_FILTER_OPTIONS(x) tptag_log_filter_options, tag_bool_v((x))
+
+TPORT_DLL extern tag_typedef_t tptag_log_filter_options_ref;
+#define TPTAG_LOG_FILTER_OPTIONS_REF(x) tptag_log_filter_options_ref, tag_bool_vr(&(x))
+
 TPORT_DLL extern tag_typedef_t tptag_dump;
 #define TPTAG_DUMP(x) tptag_dump, tag_str_v((x))
 
