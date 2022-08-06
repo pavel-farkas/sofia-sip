@@ -295,6 +295,7 @@ struct tport_master {
   tp_stack_class_t
                const *mr_tpac;		/**< Methods provided by stack */
   int                 mr_log;	        /**< Do logging of parsed messages */
+  int                 mr_log_filter_options;  /**< skip OPTIONS when logging parsed messages */
   su_root_t    	     *mr_root;		/**< SU root pointer */
 
   /**< Timer reclaiming unused connections and compartment */
