@@ -580,6 +580,19 @@ tag_typedef_t tptag_tos = INTTAG_TYPEDEF(tos);
  */
 tag_typedef_t tptag_log = INTTAG_TYPEDEF(log);
 
+/**@def TPTAG_LOG_FILTER_OPTIONS(x)
+ *
+ * If set, skips logging OPTIONS.
+ *
+ * Use with tport_tcreate(), nua_create(), nta_agent_create(),
+ * nth_engine_create(), or initial nth_site_create().
+ *
+ * @sa #TPORT_LOG environment variable, TPTAG_DUMP()
+ *
+ * @NEW_1_12_5.
+ */
+tag_typedef_t tptag_log_filter_options = INTTAG_TYPEDEF(log_filter_options);
+
 /**@def TPTAG_DUMP(x)
  *
  * Filename for dumping unparsed messages from transport.
