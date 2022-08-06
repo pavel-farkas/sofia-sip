@@ -1,3 +1,9 @@
+sofia-sip (1.14.4-1) unstable; urgency=medium
+
+  * New Release from upstream
+
+ -- 2600Hz <engineering@2600hz.com>  Sat, 6 Aug 2022 10:00:10 +0000
+
 sofia-sip (1.14.3-1) unstable; urgency=medium
 
   * New Release from upstream
