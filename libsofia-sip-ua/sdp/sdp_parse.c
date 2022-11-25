@@ -1557,6 +1557,7 @@ static void parse_payload(sdp_parser_t *p, char *r, sdp_rtpmap_t **result)
 	rm->rm_pt = value;
 	rm->rm_encoding = "";
 	rm->rm_rate = 0;
+	rm->ptime = 0;
       }
     }
     else if (p->pr_config && r[0] == '*' && (r[1] == ' ' || r[1] == '\0')) {
@@ -1568,6 +1569,7 @@ static void parse_payload(sdp_parser_t *p, char *r, sdp_rtpmap_t **result)
       rm->rm_any = 1;
       rm->rm_encoding = "*";
       rm->rm_rate = 0;
+      rm->ptime = 0;
 
       return;
     }
@@ -1652,6 +1654,20 @@ static void parse_media_attr(sdp_parser_t *p, char *r, sdp_media_t *m,
 
     a->a_name  = name;
     a->a_value = value;
+
+    /* hack for multiple ptime on same media */
+    if (su_casematch(name, "ptime")) {
+      sdp_rtpmap_t *rm;
+      int k;
+      int ptime = atoi(value);
+      for (k=0, rm = m->m_rtpmaps; rm && k < m->ptimes; k++, rm = rm->rm_next);
+      if (rm && rm->ptime == 0) {
+          rm->ptime = ptime;
+      }
+      m->ptimes++;
+    }
+    /* end hack */
+
   }
 }
 
@@ -1702,6 +1718,7 @@ static int parse_rtpmap(sdp_parser_t *p, char *r, sdp_media_t *m)
   rm->rm_encoding = encoding;
   rm->rm_rate = rate;
   rm->rm_params = params;
+  rm->ptime = 0;
 
   return 0;
 }
