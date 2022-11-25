@@ -292,6 +292,7 @@ struct sdp_media_s
   sdp_bandwidth_t  *m_bandwidths;	/**< Bandwidth specification */
   sdp_key_t        *m_key;		/**< Media key */
   sdp_attribute_t  *m_attributes;	/**< Media attributes */
+  int               ptimes;
 
   void             *m_user;	        /**< User data. */
 
@@ -330,6 +331,7 @@ struct sdp_rtpmap_s {
   unsigned       rm_pt : 7;		/**< Payload type */
   unsigned       rm_any : 1;	        /**< Wildcard entry */
   unsigned       :0;
+  int            ptime;
 };
 
 SOFIAPUBVAR sdp_rtpmap_t const * const sdp_rtpmap_well_known[128];
