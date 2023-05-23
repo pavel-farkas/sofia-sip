@@ -1,5 +1,5 @@
 Name:           sofia-sip
-Version:        1.14.7
+Version:        1.14.8
 Release:        1%{?dist}
 Summary:        Sofia SIP User-Agent library
 
@@ -107,6 +107,8 @@ find . -name installdox -delete
 #%{_mandir}/man1/*.1*
 
 %changelog
+* Tue May 23 2023 2600Hz <engineering@2600hz.com> - 1.14.8-1
+- upstream release 1.13.15
 * Thu Feb 23 2023 2600Hz <engineering@2600hz.com> - 1.14.7-1
 - upstream release 1.13.14
 * Fri Nov 25 2022 2600Hz <engineering@2600hz.com> - 1.14.6-1
