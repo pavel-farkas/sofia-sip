@@ -1020,7 +1020,7 @@ int soa_sdp_mode_set(sdp_session_t const *user,
   sdp_media_t *sm;
   sdp_media_t const *rm, *rm_next, *um;
   int retval = 0, i, j;
-  int hold_all;
+  int hold_all, unhold_all;
   int inactive_all;
   char const *hold_media = NULL;
   sdp_mode_t send_mode, recv_mode;
@@ -1034,6 +1034,7 @@ int soa_sdp_mode_set(sdp_session_t const *user,
   rm = remote ? remote->sdp_media : NULL, rm_next = NULL;
 
   hold_all = su_strmatch(hold, "*");
+  unhold_all = su_strmatch(hold, "");
   inactive_all = su_strmatch(hold, "#");
 
   i = 0;
@@ -1077,6 +1078,10 @@ int soa_sdp_mode_set(sdp_session_t const *user,
     }
     else if (hold_all) {
       recv_mode = (sdp_mode_t)0;
+    }
+    else if (unhold_all) {
+      send_mode = (sdp_mode_t)1;
+      recv_mode = (sdp_mode_t)2;
     }
     else if (hold && (hold_media = su_strcasestr(hold, sm->m_type_name))) {
       recv_mode = (sdp_mode_t)0;
